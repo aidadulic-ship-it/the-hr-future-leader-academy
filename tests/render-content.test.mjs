@@ -55,3 +55,16 @@ test('Grill-me und Für Lehrende sind direkt von der Startseite erreichbar',()=>
   assert.match(teaching,/<h1>Für Lehrende<\/h1>/);
   assert.match(teaching,/id="grill-library"/);
 });
+
+test('Spiel ist direkt sichtbar und öffnet die erste von 60 Fragen',()=>{
+  const home=render('pathPage()');
+  assert.match(home,/HR Mastermind spielen/);
+  assert.match(home,/06 · SPIEL/);
+  assert.match(home,/data-action="start-game"/);
+  const game=render(`state.page='practice'; state.selected={type:'game'}; practicePage()`);
+  assert.match(game,/HR Mastermind/);
+  assert.match(game,/1\/60/);
+  assert.match(game,/data-action="save-game"/);
+  assert.match(game,/data-action="next-game"/);
+  assert.equal((game.match(/data-action="game-level"/g)||[]).length,5);
+});

@@ -1,6 +1,6 @@
 # Testbericht · 15. November 2026
 
-Ausgeführt mit Node.js und `npm test` im Projektordner. Ergebnis: **18 Tests bestanden, 0 fehlgeschlagen**.
+Ausgeführt mit Node.js und `npm test` im Projektordner. Ergebnis: **19 Tests bestanden, 0 fehlgeschlagen**.
 
 Geprüft wurden Katalogmengen und eindeutige IDs; sechs unterschiedliche Arbeitsschritte und zwei Niveaus je Skill; Kennzeichnung synthetischer Fälle; getrennte Kontodaten, Export und Löschung; Passwort-Hashing und Sitzungsende; Campusrollen, Sitzplatzgrenze, Kurs, Aufgabe, Einreichung und Lehrendenfeedback; API-Setup, Login, CSRF-Schutz, ID-Validierung und persistierte Lernantwort; Handler für alle deklarierten UI-Aktionen; relative Assets, vorhandene Bilddateien und Katalog der GitHub-Pages-Demo. Der Startseitentest prüft, dass konkrete Lerninhalte vor den Kennzahlen stehen. Die sechs PNG-Kartenbilder wurden auf Existenz geprüft, und ein PNG wurde über den Server-Handler binär ausgeliefert.
 
@@ -13,5 +13,6 @@ Ein weiterer Test prüft serverseitige Speicherung und persönlichen Export von 
 Die `.gitignore`-Regel wurde auf den Laufzeitordner `/data/` begrenzt. `git check-ignore` bestätigt, dass `src/data/legacy-content.json`, `src/data/skill-inventory.json` und `src/data/source-candidates.json` beim Git-Upload nicht ausgeschlossen werden.
 
 Ein zusätzlicher Render-Test prüft die direkten Einstiegskarten **Grill-me** und **Für Lehrende** auf der Startseite, den Grill-me-Einstieg im Practice Studio und den sichtbar beschrifteten Lehrendenbereich.
+Ein weiterer Test prüft den direkten Spieleinstieg auf der Startseite und die erste von 60 Fragen mit fünf wählbaren Leveln, Speichern und Weiterblättern.
 
 Bekannte Grenzen: kein Passwort-Reset, kein Rate Limiting, keine externe KI, keine adaptive Verzweigung der Krisen, keine automatische Benotung, keine produktionsfertige Hosting-Konfiguration. Die Lerninhalte sind dort als rekonstruiert markiert, wo die Originale nicht geliefert wurden.
