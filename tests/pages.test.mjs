@@ -16,7 +16,9 @@ test('GitHub-Pages-Einstieg benutzt relative Assets und vollständigen statische
   assert.match(script,/localStorage\.setItem/);
   assert.match(script,/\.\/assets\/worlds\/\$\{esc\(icon\)\}\.png/);
   assert.match(script,/\.\/assets\/nav\/\$\{icon\}\.svg/);
-  assert.match(script,/\.\/assets\/hero\.svg/);
+  assert.match(script,/\.\/assets\/hero-future\.png/);
+  assert.match(script,/<span class="hero-art-title">Future HR Lab<\/span>/);
+  assert.match(css,/\.hero-art-title\{/);
   assert.match(script,/DIREKT IN DIE LERNARBEIT/);
   assert.match(script,/SKILL-001/);
   assert.match(script,/CASE-001/);
@@ -25,7 +27,7 @@ test('GitHub-Pages-Einstieg benutzt relative Assets und vollständigen statische
     assert.ok(existsSync(new URL(`../assets/worlds/${name}.png`,import.meta.url)),name);
   for (const name of ['path','worlds','decisions','knowledge','practice','teaching'])
     assert.ok(existsSync(new URL(`../assets/nav/${name}.svg`,import.meta.url)),name);
-  assert.ok(existsSync(new URL('../assets/hero.svg',import.meta.url)));
+  assert.ok(existsSync(new URL('../assets/hero-future.png',import.meta.url)));
   assert.ok(css.includes('#12295a'));
   for (const key of ['worlds','competencies','skills','cases','perspectives','gameQuestions','assessment','crises'])
     assert.equal(content[key].length,catalog[key].length,key);

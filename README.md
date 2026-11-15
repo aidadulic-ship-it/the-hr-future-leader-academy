@@ -10,7 +10,7 @@ Die Dateien im Repository-Stammverzeichnis bilden eine **GitHub-Pages-Demo**. Si
 
 Auf der Startseite führen konkrete Einstiege direkt zu einem sechsstufigen Skill, einem synthetischen Executive Case und einer gekennzeichneten Originalquelle. Die Kennzahlen stehen darunter.
 
-Die Illustrationen liegen unter [`assets/`](assets/): sechs hochauflösende PNG-Kartenbilder, sechs SVG-Navigationsicons und ein Hero-Motiv. Die Kartenbilder wurden anhand des von der Nutzerin gezeigten Screenshots visuell rekonstruiert. Die Original-Bilddateien waren im Importpaket nicht enthalten. Pages und Serverversion laden dieselben Assets.
+Die Illustrationen liegen unter [`assets/`](assets/): sechs hochauflösende PNG-Kartenbilder, sechs SVG-Navigationsicons und ein neues, 3D-Hero-Motiv auf weißem Hintergrund. Die Kartenbilder wurden anhand des von der Nutzerin gezeigten Screenshots visuell rekonstruiert. Die Original-Bilddateien waren im Importpaket nicht enthalten. Pages und Serverversion laden dieselben Assets.
 
 Die sechs Bereiche sind My Future Path, Competency Worlds, Decision Lab, Knowledge Hub, Practice Studio und Teaching Studio. Lernantworten werden serverseitig einem Konto zugeordnet. Campusrollen begrenzen Kursverwaltung, Einreichungen und Feedback. Persönliche Daten lassen sich exportieren und ein Konto löschen; wenn eine Person die letzte Campusadministration ist, muss die Verwaltung vorher übertragen werden.
 

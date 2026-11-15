@@ -5,7 +5,7 @@ Der importierte Auftrag ist eine Anforderung, kein Beleg für tatsächlich vorha
 | Bereich | In diesem Paket | Herkunft und Grenze |
 | --- | --- | --- |
 | 6 Kompetenzwelten | vorhanden | Struktur nach neuer UX-Spezifikation, Texte redaktionell neu |
-| 6 Welt-Illustrationen, 6 Navigationsicons, Hero-Motiv | vorhanden | sechs PNG-Kartenbilder visuell aus dem nachgereichten Screenshot rekonstruiert; SVG-Navigation und Hero-Motiv; keine Original-Bilddateien im Importpaket |
+| 6 Welt-Illustrationen, 6 Navigationsicons, Hero-Motiv | vorhanden | sechs PNG-Kartenbilder visuell aus dem nachgereichten Screenshot rekonstruiert; SVG-Navigation; neues 3D-Hero-Motiv mit sechs thematisch verbundenen Szenen, nach Nutzerfeedback auf weißen Hintergrund gesetzt; keine Original-Bilddateien im Importpaket |
 | 14 Kompetenzen × 5 Stufen | vorhanden | Indikatoren und Stufen redaktionell rekonstruiert; keine extern validierte Skala |
 | 20 Skill-Workflows × 6 Schritte × 2 Niveaus | vorhanden | Titel und IDs aus `SKILL_INVENTAR.json`; 7 aus verdichteten Modulen, 13 redaktionell rekonstruiert; jeder Skill verlinkt passende frühere Academy-Prompts und einen passenden Fall. Die widersprüchlichen historischen Case-IDs wurden fachlich neu zugeordnet. |
 | 20 vollständige frühere Academy-Prompts | übernommen | Wortlaut und je sechs Schritte aus dem im Chat erarbeiteten Projektstand `academy-core/index.html`; eigene IDs `PROMPT-01` bis `PROMPT-20`, ohne doppelte Datensätze. `/grill-me`, `/evidence-check` und `/hr-decision-lab` sind enthalten. |

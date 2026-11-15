@@ -76,7 +76,7 @@ const server = createServer(async (req, res) => {
   try {
     const path = new URL(req.url, 'http://localhost').pathname;
     if (path.startsWith('/api/')) return await action(req, res, path);
-    if (req.method === 'GET' && (/^\/assets\/nav\/[a-z-]+\.svg$/.test(path) || /^\/assets\/worlds\/[a-z-]+\.png$/.test(path) || path === '/assets/hero.svg'))
+    if (req.method === 'GET' && (/^\/assets\/nav\/[a-z-]+\.svg$/.test(path) || /^\/assets\/worlds\/[a-z-]+\.png$/.test(path) || path === '/assets/hero-future.png'))
       return reply(res, 200, await readFile(resolve(root, '..', path.slice(1))), path.endsWith('.png') ? 'image/png' : 'image/svg+xml');
     const asset = files[path]; if (!asset || req.method !== 'GET') throw Error('not_found');
     return reply(res, 200, await readFile(resolve(root, asset[0]), 'utf8'), asset[1]);

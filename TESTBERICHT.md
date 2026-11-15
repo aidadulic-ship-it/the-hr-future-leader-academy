@@ -18,3 +18,7 @@ Ein weiterer Test prüft den direkten Spieleinstieg auf der Startseite und die e
 Die sichtbaren Texte wurden auf missverständliche Aussagen zu Herkunft und KI-Funktion geprüft. Das Practice Studio unterscheidet übernommene Prompt-Vorlagen, neu erstellte Spielfragen, synthetische Krisen und Selbsteinschätzung. Die erste Spielfrage zeigt jetzt den fiktiven Fall mit 12 von durchschnittlich 80 Austritten, Vergleichsgruppe, Zeitraum und Ausgangsdaten direkt vor der Aufgabe. Der Render-Test prüft diese Angaben und die Kennzeichnung, dass keine automatische Bewertung erfolgt.
 
 Bekannte Grenzen: kein Passwort-Reset, kein Rate Limiting, keine externe KI, keine adaptive Verzweigung der Krisen, keine automatische Benotung, keine produktionsfertige Hosting-Konfiguration. Die Lerninhalte sind dort als rekonstruiert markiert, wo die Originale nicht geliefert wurden.
+
+Das neue Hero-Bild auf weißem Hintergrund ist als PNG eingebunden. Die GitHub-Pages-Ansicht referenziert die relative Bilddatei; der Server liefert sie als image/png aus. Syntaxprüfung und alle 19 Tests bestanden nach dem Austausch erneut.
+
+Der sichtbare Schriftzug „Future HR Lab“ liegt als responsiver Seitentext über dem Hero-Bild. Der Einstiegstest prüft Wortlaut und Stilregel.
