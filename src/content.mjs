@@ -3,6 +3,7 @@ import { profiles as referenceProfiles } from './research-reference.mjs';
 
 const inventory = JSON.parse(readFileSync(new URL('./data/skill-inventory.json', import.meta.url), 'utf8'));
 const sourceCandidates = JSON.parse(readFileSync(new URL('./data/source-candidates.json', import.meta.url), 'utf8'));
+const inherited = JSON.parse(readFileSync(new URL('./data/legacy-content.json', import.meta.url), 'utf8'));
 export const phases = ['Explore', 'Challenge', 'Decide', 'Apply', 'Reflect', 'Demonstrate'];
 
 const worldSeeds = [
@@ -73,7 +74,8 @@ const perspectives = referenceProfiles.map((profile, index) => {
   }
   return { id: `P-${String(index + 1).padStart(2, '0')}`, person: profile.name, topic: profile.topic,
     learningGoal: profile.learningGoal, counterposition: profile.counterpoint, sourceIds: [sourceId],
-    video: profile.video, skillId: profile.skill, caseId: profile.caseId };
+    video: profile.video, skillId: profile.skill, caseId: profile.caseId, caseQuestion: profile.caseQuestion,
+    grillId: inherited.grills.find(item => item.person === profile.name || (profile.name === 'John W. Boudreau' && item.person === 'John Boudreau'))?.id ?? null };
 });
 
 // Sieben Skills basieren auf den verdichteten Modulen des Importpakets; 8–20 sind redaktionell rekonstruiert.
@@ -103,9 +105,18 @@ const skillDesigns = [
 const skills = inventory.map((item, index) => {
   const [scenario, steps, evidenceIds] = skillDesigns[index];
   const constructed = index >= 7;
+  const caseLinks = ['CASE-002','CASE-009','CASE-007','CASE-025','CASE-010','CASE-019','CASE-016','CASE-025','CASE-006','CASE-002','CASE-011','CASE-012','CASE-013','CASE-014','CASE-015','CASE-016','CASE-017','CASE-018','CASE-019','CASE-020'];
+  const promptLinks = [
+    ['evidence-check','hr-decision-lab'],['safe-ai-hr','human-ai-work-design'],['workforce-skills-planning','strategic-hr-value'],
+    ['workforce-skills-planning'],['safe-ai-hr','fair-selection'],['grill-me','hr-experiment'],['stakeholder-negotiation','change-in-practice'],
+    ['workforce-skills-planning'],['learning-design','learning-review'],['hr-data-reasoning','organization-diagnosis'],
+    ['workforce-skills-planning'],['strategic-hr-value'],['organization-diagnosis'],['executive-hr-brief'],
+    ['learning-review'],['stakeholder-negotiation'],['fair-selection'],['evidence-check'],['executive-hr-brief'],['hr-decision-lab','executive-hr-brief'],
+  ];
   return {
     id: item.id, title: item.title, worldId: item.world_id, status: constructed ? 'redaktionell rekonstruiert' : 'aus verdichtetem Konzept rekonstruiert',
-    scenario, steps, evidenceIds, caseId: item.case_id ?? `CASE-${String(index + 1).padStart(3, '0')}`,
+    scenario, steps, evidenceIds, caseId: caseLinks[index],
+    relatedPromptIds: promptLinks[index].map(slug => inherited.prompts.find(prompt => prompt.slug === slug)?.id).filter(Boolean),
     competencyId: competencies.find(x => x.worldId === item.world_id).id,
     rubric: `Eine starke Arbeit zu ${item.title} trennt Fakt und Annahme, begründet eine Alternative, nennt ein Risiko und definiert ein beobachtbares Review.`,
     levels: {
@@ -160,6 +171,7 @@ const cases = caseSeeds.map(([title, scenario, metrics, options, counterpoint, r
   rubric: index < 8 ? deepFields[index][2] : 'Evidenz, Gegenposition, Verantwortung und Review',
   reviewDays: index < 8 ? 90 : 30,
 }));
+for (const item of cases) item.originalCase = inherited.cases.find(original => original.id === item.id) ?? null;
 
 const gameQuestions = skills.flatMap((skill, index) => [0, 2, 4].map((stepIndex, variant) => ({
   id: `GAME-${String(index * 3 + variant + 1).padStart(3, '0')}`,
@@ -191,4 +203,6 @@ const crises = [
   ] },
 ];
 
-export const catalog = { worlds, competencies, evidence, perspectives, skills, cases, gameQuestions, assessment, crises, phases, version: 1, sourceDate: '2026-11-15' };
+export const catalog = { worlds, competencies, evidence, perspectives, skills, cases, gameQuestions, assessment, crises, phases,
+  prompts: inherited.prompts, grills: inherited.grills, teaching: inherited.teaching, workbench: inherited.workbench,
+  version: 2, sourceDate: '2026-11-15' };

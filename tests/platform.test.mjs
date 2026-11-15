@@ -12,6 +12,13 @@ test('Lernantworten bleiben kontogebunden; Export und Löschung funktionieren', 
   assert.throws(()=>p.exportPersonal(a.id),/forbidden/);
 });
 
+test('Prompt, Grill-me und Workshop werden im Konto gespeichert und exportiert',async()=>{
+  const p=new Platform();const user=await p.register('admin@example.org','a-long-password-123',true);
+  for(const [kind,contentId] of [['prompt','PROMPT-01'],['grill','GRILL-01'],['workshop','WORKSHOP-01']])p.saveLearning(user.id,{kind,contentId,phase:0,answer:`Eigene Arbeitsprobe zu ${contentId}`});
+  assert.deepEqual(p.learning(user.id).map(x=>x.kind),['prompt','grill','workshop']);
+  assert.equal(p.exportPersonal(user.id).learning.length,3);
+});
+
 test('Campusrollen, Plätze, Einreichung und Lehrendenfeedback', async () => {
   const p=new Platform(); const admin=await p.register('admin@example.org','a-long-password-123',true);
   const teacher=await p.register('teacher@example.org','a-long-password-123');

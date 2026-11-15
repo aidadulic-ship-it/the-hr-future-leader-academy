@@ -71,7 +71,7 @@ export class Platform {
 
   saveLearning(actor, input) {
     this.user(actor);
-    requireValue(['skill', 'case', 'game', 'assessment', 'crisis', 'path'].includes(input.kind), 'invalid_kind');
+    requireValue(['skill', 'case', 'game', 'assessment', 'crisis', 'path', 'prompt', 'grill', 'workshop'].includes(input.kind), 'invalid_kind');
     const entry = { id: id(), userId: actor, kind: input.kind, contentId: clean(input.contentId, 80),
       phase: Number.isSafeInteger(input.phase) && input.phase >= 0 && input.phase <= 24 ? input.phase : 0,
       level: input.level === 'executive' ? 'executive' : 'foundation',

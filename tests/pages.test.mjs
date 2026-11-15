@@ -17,6 +17,10 @@ test('GitHub-Pages-Einstieg benutzt relative Assets und vollständigen statische
   assert.match(script,/\.\/assets\/worlds\/\$\{esc\(icon\)\}\.png/);
   assert.match(script,/\.\/assets\/nav\/\$\{icon\}\.svg/);
   assert.match(script,/\.\/assets\/hero\.svg/);
+  assert.match(script,/DIREKT IN DIE LERNARBEIT/);
+  assert.match(script,/SKILL-001/);
+  assert.match(script,/CASE-001/);
+  assert.ok(script.indexOf('${featuredContent()}') < script.indexOf('DEIN FORTSCHRITT'),'Lerninhalte stehen vor den Kennzahlen');
   for (const name of ['horizon','orbit','grid','prism','signal','compass'])
     assert.ok(existsSync(new URL(`../assets/worlds/${name}.png`,import.meta.url)),name);
   for (const name of ['path','worlds','decisions','knowledge','practice','teaching'])

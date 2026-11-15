@@ -14,3 +14,5 @@ Stand: 15. November 2026. Historische Dateien sind Referenzen, keine vollständi
 | `SIEBEN_KONZIPIERTE_MODULE.md` | Sieben Szenarien mit methodischem Gerüst. | Keine vollständigen historischen Originaltexte. |
 
 Die neue UX, Navigation und Datenstruktur folgen der Informationsarchitektur des Pakets. Altes HTML und CSS werden nicht als UI übernommen.
+
+Zusätzlich lag im bisherigen Chat-Arbeitsverzeichnis der früher erarbeitete Academy-Projektstand `work/academy-core/index.html` vor. Er enthält tatsächlich 20 vollständige HR-Lerncoach-Prompts mit je sechs Aufgaben, zwölf vollständige Grill-me-Lehrprompts, acht ausgearbeitete Fallstudien und Lehrmaterial. Diese Inhalte wurden aus der Datei extrahiert und in `src/data/legacy-content.json` übernommen; das alte Interface und dessen CSS wurden nicht verwendet. Der ursprüngliche Spiel-Quellcode und die 120 Musterantworten sind auch dort nicht vorhanden.

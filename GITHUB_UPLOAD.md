@@ -4,9 +4,9 @@ Das ZIP ist ein **Repository-Paket**. Im Stammverzeichnis liegen `index.html`, `
 
 ## Im Browser
 
-1. Auf GitHub ein **neues, zunächst privates Repository** erstellen.
+1. Das bestehende Repository `The-HR-Future-Thinkers-Academy` öffnen. Für ein anderes Projekt gegebenenfalls ein neues Repository erstellen.
 2. Dieses ZIP lokal entpacken.
-3. **Die Dateien und Ordner aus dem entpackten Verzeichnis** in das Repository hochladen, insbesondere `index.html`, `app.css`, `app.js`, `content.json`, `assets/`, `src/`, `tests/` und `.github/`. Der Inhalt gehört direkt in das Stammverzeichnis des Repositorys, nicht in einen zusätzlichen ZIP-Unterordner. Vorhandene alte Dateien mit gleichem Namen ersetzen.
+3. **Die Dateien und Ordner aus dem entpackten Verzeichnis** in das Repository hochladen, insbesondere `index.html`, `app.css`, `app.js`, `content.json`, `assets/`, `src/`, `tests/` und `.github/`. Der Inhalt gehört direkt in das Stammverzeichnis des Repositorys, nicht in einen zusätzlichen ZIP-Unterordner. Vorhandene alte Dateien mit gleichem Namen ersetzen. Für diese Korrektur sind insbesondere `app.js`, `app.css`, `src/app.js` und `src/app.css` neu.
 4. Unter **Settings → Pages** als Quelle den Branch `main` und den Ordner `/ (root)` wählen. Nach dem nächsten Build die Seite neu laden. Die URL unter `...github.io/REPOSITORYNAME/` zeigt nun die Demo mit Layout und Inhalten.
 5. Unter **Actions** prüfen, ob „Academy checks“ erfolgreich ist.
 
