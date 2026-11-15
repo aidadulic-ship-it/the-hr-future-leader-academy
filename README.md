@@ -16,4 +16,6 @@ Die sechs Bereiche sind My Future Path, Competency Worlds, Decision Lab, Knowled
 
 Der im früheren Chat erarbeitete Academy-Projektstand wurde erneut ausgewertet. Seine 20 vollständigen Prompts und je sechs Arbeitsschritte liegen in `src/data/legacy-content.json`, ebenso zwölf vollständige Grill-me-Lehrprompts, acht ausgearbeitete synthetische Fallstudien, ein 14-Felder-Workshop und Lehrmaterialien. Der Katalog in `src/content.mjs` verknüpft diese Datensätze mit Skills, Fällen, Perspektiven und Teaching Studio. Die GitHub-Pages-Demo erhält denselben Katalog als `content.json`. In der Prompt Library lassen sich Texte lesen, kopieren und exportieren; eigene Antworten lassen sich im Browser speichern. Auf dem Node-Host werden sie dem angemeldeten Konto zugeordnet.
 
+**Direkte Einstiege:** Auf `My Future Path` führen eigene Karten zu **Grill-me** und **Für Lehrende**. Grill-me ist außerdem im `Practice Studio` erreichbar. Im `Teaching Studio` steht oben „Für Lehrende“, unmittelbar danach die zwölf Grill-me-Perspektiven und das weitere Lehrmaterial.
+
 Der Katalog enthält redaktionell rekonstruierte Inhalte. Quellenstatus, synthetische Fälle, nicht verfügbare Originale und Funktionsgrenzen stehen in [INHALTSSTATUS.md](INHALTSSTATUS.md). Der Teststand steht in [TESTBERICHT.md](TESTBERICHT.md).

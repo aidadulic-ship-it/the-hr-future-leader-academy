@@ -43,3 +43,15 @@ test('Executive-Fall und Skill sind mit übernommenen Inhalten verbunden',()=>{
   assert.match(skill,/data-id="PROMPT-02"/);
   assert.match(skill,/data-id="CASE-002"/);
 });
+
+test('Grill-me und Für Lehrende sind direkt von der Startseite erreichbar',()=>{
+  const home=render('pathPage()');
+  assert.match(home,/data-action="show-grills"/);
+  assert.match(home,/Für Lehrende/);
+  assert.match(home,/data-id="teaching"/);
+  const practice=render('practicePage()');
+  assert.match(practice,/Grill-me für Lehrende/);
+  const teaching=render('teachingPage()');
+  assert.match(teaching,/<h1>Für Lehrende<\/h1>/);
+  assert.match(teaching,/id="grill-library"/);
+});
