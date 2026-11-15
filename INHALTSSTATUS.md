@@ -17,7 +17,7 @@ Der importierte Auftrag ist eine Anforderung, kein Beleg für tatsächlich vorha
 | 24 Assessment-Fragen | vorhanden | Selbstreflexion mit Arbeitsprobe; kein psychometrischer Score |
 | Workshop-Workbench / Reality Check / Business Lab | vorhanden | 14 übernommene Workbench-Felder mit Speicherung/Export; Reality Check öffnet den kanonischen `/grill-me`-Prompt, Business Lab den kanonischen Executive-Fall. |
 | Teaching Studio | vorhanden | 5-teiliger 30-Tage-Lernfahrplan, 90-Minuten-Lehrplan, Rubrik, drei Abruffragen mit Musterantworten, Erklärfragen, durchgearbeitetes Beispiel, 48-Stunden-Selbstcheck, zwei Unterrichtsbeispiele, drei Lehrenden-Skills, zwei Rollenspiele mit je drei Rollenbriefings und zwölf Grill-me-Profile. Serverseitig außerdem Campus-Anfrage/Freigabe, Plätze, Rollen, Kurse, Aufgaben, Einreichung und menschliches Feedback. |
-| KI-Funktionen | keine externe KI angebunden | Human-first-Arbeitsschritte und Lehrendenfeedback funktionieren ohne vorgetäuschte KI-Ausgabe |
+| KI-Funktionen | keine KI angebunden | Antworten werden von Lernenden selbst verfasst; Rückmeldungen im Campus geben Lehrende. Reflexionshinweise sind vorformulierte Lerntexte. |
 
 Das Quellenregister unterscheidet geprüfte Metadaten, nur verlinkte Quellen und eine nicht nutzbare OECD-Startseite (`EVD-010`). Gesetzliche Einordnung, lokale Wirkung und Videoverfügbarkeit werden nicht behauptet. Alle Fälle, Zahlen und Krisen sind synthetisch. Die alten Dateinamen werden nicht als Beleg für Vollständigkeit verstanden.
 
