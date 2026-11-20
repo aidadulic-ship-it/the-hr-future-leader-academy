@@ -1,13 +1,15 @@
 import { createServer } from 'node:http';
 import { readFile, writeFile, rename, mkdir } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Platform } from './platform.mjs';
 import { catalog } from './content.mjs';
+import { backupState } from './backup.mjs';
 
 const root = dirname(fileURLToPath(import.meta.url));
 const stateFile = resolve(process.env.ACADEMY_DATA_FILE || './data/academy-state.json');
 const port = Number(process.env.PORT || 3000);
+const backupDir = resolve(process.env.ACADEMY_BACKUP_DIR || join(dirname(stateFile), 'backups'));
 const setupKey = process.env.ACADEMY_SETUP_KEY || '';
 let state = {};
 try { state = JSON.parse(await readFile(stateFile, 'utf8')); } catch (error) { if (error.code !== 'ENOENT') throw error; }
@@ -87,5 +89,9 @@ const server = createServer(async (req, res) => {
   } catch (error) { const status = error.message === 'not_found' ? 404 : ['unauthorized', 'csrf_required'].includes(error.message) ? 401 :
       ['forbidden', 'setup_required'].includes(error.message) ? 403 : 400; reply(res, status, { error: error.message }); }
 });
-if (process.env.NODE_ENV !== 'test') server.listen(port, '127.0.0.1', () => console.log(`Academy: http://127.0.0.1:${port}`));
+if (process.env.NODE_ENV !== 'test') {
+  const backup = () => queue.then(() => backupState({ stateFile, dir: backupDir })).catch(error => console.error('Backup fehlgeschlagen:', error.message));
+  backup(); setInterval(backup, 24 * 60 * 60 * 1000).unref();
+  server.listen(port, process.env.ACADEMY_HOST || '127.0.0.1', () => console.log(`Academy: http://${process.env.ACADEMY_HOST || '127.0.0.1'}:${port}`));
+}
 export { server, platform };
