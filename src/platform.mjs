@@ -29,7 +29,7 @@ export class Platform {
   exportState() { return structuredClone(this.state); }
   publicUser(userId) {
     const user = this.user(userId);
-    return { id: user.id, email: user.email, role: user.role };
+    return { id: user.id, email: user.email, role: user.role, mustChangePassword: Boolean(user.mustChangePassword) };
   }
   user(userId) {
     const user = this.state.users.find(item => item.id === userId);
@@ -43,10 +43,36 @@ export class Platform {
     requireValue(!platformAdmin || this.state.users.length === 0, 'forbidden');
     const normalized = email.trim().toLowerCase();
     requireValue(!this.state.users.some(item => item.email === normalized), 'email_exists');
-    const salt = randomBytes(16).toString('hex');
-    const hash = (await scrypt(password, salt, 64)).toString('hex');
-    const user = { id: id(), email: normalized, role: platformAdmin ? 'platform-admin' : 'member', salt, hash, createdAt: now() };
+    const user = { id: id(), email: normalized, role: platformAdmin ? 'platform-admin' : 'member', ...await this.credentials(password), createdAt: now() };
     this.state.users.push(user);
+    return this.publicUser(user.id);
+  }
+  async credentials(password) {
+    const salt = randomBytes(16).toString('hex');
+    return { salt, hash: (await scrypt(password, salt, 64)).toString('hex') };
+  }
+  dropSessions(userId) { for (const [token, session] of this.sessions) if (session.userId === userId) this.sessions.delete(token); }
+  // Plattform-Admins setzen jedes Konto zurück, Campus-Leitungen nur Mitglieder des eigenen Campus (keine Admins).
+  // Alle Ablehnungen lauten gleich 'forbidden', damit sich nicht erkennen lässt, welche E-Mail-Adressen existieren.
+  async resetPassword(actor, email) {
+    const admin = this.user(actor);
+    const target = this.state.users.find(item => item.email === String(email).trim().toLowerCase());
+    const leadsTarget = target && target.role !== 'platform-admin'
+      && !this.state.campuses.some(c => c.members.some(m => m.userId === target.id && m.role === 'campus-admin'))
+      && this.state.campuses.some(c => c.status === 'active' && c.members.some(m => m.userId === actor && m.role === 'campus-admin')
+        && c.members.some(m => m.userId === target.id));
+    requireValue(target && (admin.role === 'platform-admin' || leadsTarget), 'forbidden');
+    const temporaryPassword = randomBytes(12).toString('base64url');
+    Object.assign(target, await this.credentials(temporaryPassword), { mustChangePassword: true });
+    this.dropSessions(target.id);
+    return { email: target.email, temporaryPassword };
+  }
+  async changePassword(actor, current, next) {
+    const user = this.user(actor);
+    const candidate = await scrypt(String(current), user.salt, 64);
+    requireValue(timingSafeEqual(candidate, Buffer.from(user.hash, 'hex')), 'invalid_credentials');
+    requireValue(typeof next === 'string' && next.length >= 12 && next.length <= 1024, 'invalid_password');
+    Object.assign(user, await this.credentials(next), { mustChangePassword: false });
     return this.publicUser(user.id);
   }
   async login(email, password) {
@@ -55,7 +81,7 @@ export class Platform {
     const candidate = await scrypt(String(password), salt, 64);
     const expected = Buffer.from(user?.hash ?? '00'.repeat(64), 'hex');
     requireValue(user && timingSafeEqual(candidate, expected), 'invalid_credentials');
-    for (const [token, session] of this.sessions) if (session.userId === user.id) this.sessions.delete(token);
+    this.dropSessions(user.id);
     const token = randomBytes(32).toString('base64url');
     const csrf = randomBytes(24).toString('base64url');
     this.sessions.set(token, { userId: user.id, csrf, expiresAt: Date.now() + 12 * 60 * 60 * 1000 });

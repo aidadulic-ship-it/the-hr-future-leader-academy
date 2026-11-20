@@ -49,6 +49,8 @@ const action = async (req, res, path) => {
     return reply(res, 200, { user: result.user, csrf: result.csrf }); }
   const { actor, token } = auth(req);
   if (req.method === 'GET' && path === '/api/me') return reply(res, 200, { user: platform.publicUser(actor), csrf: platform.session(token).csrf, campuses: platform.campuses(actor) });
+  if (req.method === 'POST' && path === '/api/users/reset-password') { const body = await readBody(req); const result = await platform.resetPassword(actor, body.email); await persist(); return reply(res, 200, result); }
+  if (req.method === 'POST' && path === '/api/change-password') { const body = await readBody(req); const user = await platform.changePassword(actor, body.current, body.next); await persist(); return reply(res, 200, user); }
   if (req.method === 'POST' && path === '/api/logout') { platform.logout(token); res.setHeader('Set-Cookie', 'academy_session=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0'); return reply(res, 200, { ok: true }); }
   if (req.method === 'GET' && path === '/api/learning') return reply(res, 200, platform.learning(actor));
   if (req.method === 'POST' && path === '/api/learning') { const body = await readBody(req);
