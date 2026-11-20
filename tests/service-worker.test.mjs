@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { Readable } from 'node:stream';
 import { mkdtemp, rm } from 'node:fs/promises';
@@ -111,4 +111,14 @@ test('Service Worker: wird unter /sw.js ausgeliefert und von der App registriert
   const sw = await get('/sw.js');
   assert.equal(sw.status, 200); assert.match(sw.headers['content-type'], /javascript/); assert.equal(sw.headers['cache-control'], 'no-cache');
   assert.match((await get('/app.js')).body, /serviceWorker\?\.register\(\s*['"]\/sw\.js['"]/);
+});
+
+test('Service Worker: alle Bilder, die die App anzeigt, sind sofort offline verfügbar', async () => {
+  const w = await loadWorker(); await w.install();
+  const cached = new Set([...w.stores.values()].flatMap(m => [...m.keys()]).map(u => new URL(u).pathname));
+  const images = ['/assets/hero-future.png'];
+  for (const dir of ['nav', 'worlds'])
+    for (const name of await readdir(new URL(`../assets/${dir}/`, import.meta.url))) images.push(`/assets/${dir}/${name}`);
+  assert.ok(images.length >= 13);
+  for (const path of images) assert.ok(cached.has(path), `${path} fehlt im Offline-Cache`);
 });

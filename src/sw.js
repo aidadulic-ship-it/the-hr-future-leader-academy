@@ -1,8 +1,11 @@
 // Service Worker der HR Future Thinkers Academy.
 // Ziel: App-Hülle und Lerninhalte offline lesbar machen. Konto- und Schreibzugriffe bleiben immer beim Server.
-const CACHE = 'academy-v1';
+const CACHE = 'academy-v2';
 const SHELL = ['/', '/app.css', '/app.js', '/manifest.webmanifest', '/api/content',
-  '/assets/icons/icon-192.png', '/assets/icons/icon-512.png', '/assets/icons/apple-touch-icon.png'];
+  '/assets/icons/icon-192.png', '/assets/icons/icon-512.png', '/assets/icons/apple-touch-icon.png',
+  '/assets/hero-future.png',
+  ...['horizon', 'orbit', 'grid', 'prism', 'signal', 'compass'].map(name => `/assets/worlds/${name}.png`),
+  ...['path', 'worlds', 'decisions', 'knowledge', 'practice', 'teaching'].map(name => `/assets/nav/${name}.svg`)];
 
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting()));
