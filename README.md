@@ -19,3 +19,7 @@ Der im früheren Chat erarbeitete Academy-Projektstand wurde erneut ausgewertet.
 **Direkte Einstiege:** Auf `My Future Path` führen eigene Karten zu **Grill-me**, **Für Lehrende** und **HR Mastermind**. Ein Button „HR Mastermind spielen“ steht zusätzlich im Startbereich. Das Spiel ist auch im `Practice Studio` erreichbar; Grill-me ebenfalls. Im `Teaching Studio` steht oben „Für Lehrende“, unmittelbar danach die zwölf Grill-me-Perspektiven und das weitere Lehrmaterial.
 
 Der Katalog enthält redaktionell rekonstruierte Inhalte. Quellenstatus, synthetische Fälle, nicht verfügbare Originale und Funktionsgrenzen stehen in [INHALTSSTATUS.md](INHALTSSTATUS.md). Der Teststand steht in [TESTBERICHT.md](TESTBERICHT.md).
+
+## Als App (PWA)
+
+Die Server-Version ist als installierbare Web-App ausgeliefert: Manifest, App-Icons, Service Worker mit Offline-Lesen der Lerninhalte, Passwort-Reset durch Admins, Erststart-Formular für die Administration und tägliches Backup der Datendatei. Online stellen: [DEPLOY_ANLEITUNG.md](DEPLOY_ANLEITUNG.md) (Render, Frankfurt, `render.yaml`). Store-Apps und Passwort-Reset per E-Mail sind bewusst noch nicht enthalten.
