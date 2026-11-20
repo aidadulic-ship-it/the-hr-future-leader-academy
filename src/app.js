@@ -107,13 +107,5 @@ document.addEventListener('click',async ev=>{const b=ev.target.closest('[data-ac
 document.addEventListener('change',e=>{if(e.target.id==='level'){state.level=e.target.value;render()}if(e.target.id==='filter'){state.filter=e.target.value;render()}});
 $('#menu').addEventListener('click',()=>$('.sidebar').classList.toggle('open'));
 $('#account').addEventListener('click',()=>{state.page='account';render()});
+if (!staticMode) globalThis.navigator?.serviceWorker?.register('/sw.js').catch(() => {});
 try{state.catalog=await api('/content');await refresh()}catch(e){$('#main').innerHTML='<div class="notice">Die Academy konnte nicht geladen werden.</div>';toast(friendly(e))}
-
-
-
-
-
-
-
-
-

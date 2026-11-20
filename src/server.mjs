@@ -72,6 +72,7 @@ const action = async (req, res, path) => {
   throw Error('not_found');
 };
 const files = { '/': ['index.html', 'text/html; charset=utf-8'], '/app.css': ['app.css', 'text/css; charset=utf-8'], '/app.js': ['app.js', 'text/javascript; charset=utf-8'],
+  '/sw.js': ['sw.js', 'text/javascript; charset=utf-8'],
   '/manifest.webmanifest': ['manifest.webmanifest', 'application/manifest+json; charset=utf-8'] };
 const server = createServer(async (req, res) => {
   try {
