@@ -71,12 +71,13 @@ const action = async (req, res, path) => {
   if (req.method === 'POST' && path === '/api/feedback') { const b = await readBody(req); const item = platform.feedback(actor, b.campusId, b.submissionId, b.text, b.skill); await persist(); return reply(res, 200, item); }
   throw Error('not_found');
 };
-const files = { '/': ['index.html', 'text/html; charset=utf-8'], '/app.css': ['app.css', 'text/css; charset=utf-8'], '/app.js': ['app.js', 'text/javascript; charset=utf-8'] };
+const files = { '/': ['index.html', 'text/html; charset=utf-8'], '/app.css': ['app.css', 'text/css; charset=utf-8'], '/app.js': ['app.js', 'text/javascript; charset=utf-8'],
+  '/manifest.webmanifest': ['manifest.webmanifest', 'application/manifest+json; charset=utf-8'] };
 const server = createServer(async (req, res) => {
   try {
     const path = new URL(req.url, 'http://localhost').pathname;
     if (path.startsWith('/api/')) return await action(req, res, path);
-    if (req.method === 'GET' && (/^\/assets\/nav\/[a-z-]+\.svg$/.test(path) || /^\/assets\/worlds\/[a-z-]+\.png$/.test(path) || path === '/assets/hero-future.png'))
+    if (req.method === 'GET' && (/^\/assets\/nav\/[a-z-]+\.svg$/.test(path) || /^\/assets\/worlds\/[a-z-]+\.png$/.test(path) || /^\/assets\/icons\/[a-z0-9-]+\.png$/.test(path) || path === '/assets/hero-future.png'))
       return reply(res, 200, await readFile(resolve(root, '..', path.slice(1))), path.endsWith('.png') ? 'image/png' : 'image/svg+xml');
     const asset = files[path]; if (!asset || req.method !== 'GET') throw Error('not_found');
     return reply(res, 200, await readFile(resolve(root, asset[0]), 'utf8'), asset[1]);
